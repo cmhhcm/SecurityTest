@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: ParamsValidation
+server:
+  servlet:
+    context-path: /ParamsValidation
+  port: 8080
+
