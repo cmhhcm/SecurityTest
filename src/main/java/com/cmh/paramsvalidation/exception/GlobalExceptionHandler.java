@@ -4,7 +4,6 @@ import com.cmh.paramsvalidation.vo.ResponseVO;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -22,9 +21,12 @@ public class GlobalExceptionHandler {
             StringBuilder sb = new StringBuilder();
             fieldErrors.stream().forEach(eachError -> sb.append(eachError.getField() + ":" + eachError.getDefaultMessage() + ";"));
             return ResponseVO.failed(sb.toString().substring(0, sb.toString().length() - 1));
+        } else if (exception instanceof BusinessException) {
+            BusinessException businessException = (BusinessException) exception;
+            return ResponseVO.failed(businessException.getMessage());
         } else {
             exception.printStackTrace();
-            return ResponseVO.failed("error");
+            return ResponseVO.failed(" unknown error");
         }
     }
 }

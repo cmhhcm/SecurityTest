@@ -1,8 +1,18 @@
 spring:
   application:
     name: ParamsValidation
+# 数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/curd?characterEncoding=utf8
+    username: root
+    password: 123456
+# context
 server:
   servlet:
     context-path: /ParamsValidation
   port: 8080
 
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
